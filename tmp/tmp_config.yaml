@@ -1,0 +1,15 @@
+name: test
+date: '02-02-2024'
+task_dir: !ref test_project/<date>
+
+tasks: 
+  - task: !new:tasks.data.execute_query.ExecuteChQueryTask
+    - query: !name:utils.queries.ORDERS_QUERY
+    - output_path: !ref <task_dir>/output/ch_output.csv
+    download_files: 
+      - !ref <task_dir>/output/ch_output.csv
+  - task: !new:tasks.data.execute_query.ExecutePgQueryTask
+    - query: !name:utils.queries.ORDERS_QUERY
+    - output_path: !ref <task_dir>/output/ch_output.csv
+    download_files:
+      - !ref <task_dir>/output/pg_output.csv
